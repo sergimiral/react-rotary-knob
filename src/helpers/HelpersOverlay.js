@@ -22,7 +22,8 @@ class HelpersOverlay extends React.Component<HelpersOverlayProps> {
             margin: "0",
             padding: "0",
             boxSizing: "border-box",
-            position: "fixed"
+            position: "fixed",
+            pointerEvents: "none"
           },
           this.props.overlayStyle
         )
