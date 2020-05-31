@@ -5105,7 +5105,8 @@ var HelpersOverlay = function (_React$Component) {
           margin: "0",
           padding: "0",
           boxSizing: "border-box",
-          position: "fixed"
+          position: "fixed",
+          pointerEvents: "none"
         }, this.props.overlayStyle)
       };
 
@@ -5398,6 +5399,12 @@ var Knob = function (_Component) {
 
           lastPos = currentPos;
           var finalAngle = initialAngle + deltaAngle;
+          if (self.props.lockVertical) {
+            finalAngle = initialAngle + startPos.y - currentPos.y;
+          }
+          if (self.props.lockHorizontal) {
+            finalAngle = initialAngle + currentPos.x - startPos.x;
+          }
           if (finalAngle < 0) {
             //E.g -1 turns 359
             finalAngle += 360;
@@ -5482,8 +5489,10 @@ var Knob = function (_Component) {
           style = _props.style,
           format = _props.format,
           preciseMode = _props.preciseMode,
+          lockVertical = _props.lockVertical,
+          lockHorizontal = _props.lockHorizontal,
           unlockDistance = _props.unlockDistance,
-          rest = _objectWithoutProperties(_props, ["value", "defaultValue", "min", "max", "rotateDegrees", "clampMax", "clampMin", "onChange", "onStart", "onEnd", "skin", "style", "format", "preciseMode", "unlockDistance"]);
+          rest = _objectWithoutProperties(_props, ["value", "defaultValue", "min", "max", "rotateDegrees", "clampMax", "clampMin", "onChange", "onStart", "onEnd", "skin", "style", "format", "preciseMode", "lockVertical", "lockHorizontal", "unlockDistance"]);
 
       var currentValue = this.getValue();
       var angle = this.convertValueToAngle(currentValue);
@@ -5587,6 +5596,8 @@ Knob.defaultProps = {
     return val.toFixed(0);
   },
   preciseMode: true,
+  lockVertical: false,
+  lockHorizontal: false,
   unlockDistance: 100,
   defaultValue: 0,
   step: 1

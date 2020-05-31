@@ -336,3 +336,31 @@ updateAttributes: [
     </div>
   );
 });
+
+stories.add("lockVertical", () => {
+    
+  return (
+    <div style={{padding: '5em'}}>
+      <Knob
+        min={0}
+        max={100}
+        unlockDistance={0}
+        lockVertical={true}
+      />
+    </div>
+  );
+});
+
+stories.add("lockHorizontal", () => {
+    
+  return (
+    <div style={{padding: '5em'}}>
+      <Knob
+        min={0}
+        max={100}
+        unlockDistance={0}
+        lockHorizontal={true}
+      />
+    </div>
+  );
+});

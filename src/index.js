@@ -58,6 +58,8 @@ type KnobProps = {
   onStart: () => void,
   onEnd: () => void,
   style: any,
+  lockVertical: boolean,
+  lockHorizontal: boolean,
   preciseMode: boolean,
   unlockDistance: number,
   step: number
@@ -115,6 +117,8 @@ class Knob extends Component<KnobProps, KnobState> {
       return val.toFixed(0);
     },
     preciseMode: true,
+    lockVertical: false,
+    lockHorizontal: false,
     unlockDistance: 100,
     defaultValue: 0,
     step: 1
@@ -274,6 +278,12 @@ class Knob extends Component<KnobProps, KnobState> {
 
         lastPos = currentPos;
         let finalAngle = initialAngle + deltaAngle;
+        if (self.props.lockVertical) {
+          finalAngle = initialAngle + startPos.y - currentPos.y;
+        }
+        if (self.props.lockHorizontal) {
+          finalAngle = initialAngle + currentPos.x - startPos.x;
+        }
         if (finalAngle < 0) {
           //E.g -1 turns 359
           finalAngle += 360;
@@ -355,6 +365,8 @@ class Knob extends Component<KnobProps, KnobState> {
       style,
       format,
       preciseMode,
+      lockVertical,
+      lockHorizontal,
       unlockDistance,
       ...rest
     } = this.props;
