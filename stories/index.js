@@ -8,11 +8,18 @@ const stories = storiesOf("Knob", module);
 
 class KnobApp extends React.Component {
   state = {
-    value: 50
+    value: 0
   };
 
   changeValue(val) {
-    this.setState({ value: val });
+    // this.setState({ value: val });
+    const maxDistance = 25;
+    let distance = Math.abs(val - this.state.val);
+    if (distance > maxDistance) {
+        return;
+    } else {
+        this.setState({ value: val });
+    }
   }
 
   render() {
@@ -36,6 +43,8 @@ class KnobApp extends React.Component {
           min={0}
           max={100}
           value={this.state.value}
+          lockVertical={true}
+          unlockDistance={0}
         />
       </div>
     );
@@ -337,7 +346,7 @@ updateAttributes: [
   );
 });
 
-stories.add("lockVertical", () => {
+stories.add("lockVertical_original", () => {
     
   return (
     <div style={{padding: '5em'}}>
@@ -346,6 +355,42 @@ stories.add("lockVertical", () => {
         max={100}
         unlockDistance={0}
         lockVertical={true}
+      />
+    </div>
+  );
+});
+
+
+stories.add("lockVertical_UNcontrolled", () => {
+  function onChange(val) {
+    console.log("new value:" + val);
+  }
+  return (
+    <div style={{padding: '5em'}}>
+      <Knob
+        min={0}
+        max={100}
+        unlockDistance={0}
+        lockVertical={true}
+        onChange={onChange}
+      />
+    </div>
+  );
+});
+    
+stories.add("lockVertical_controlled", () => {
+    
+  return (
+    <div style={{padding: '5em'}}>
+      <Knob
+        min={0}
+        max={100}
+        unlockDistance={0}
+        lockVertical={true}
+        onChange={val => {
+            this.changeValue(val);
+          }}
+        // value={this.state.value}
       />
     </div>
   );

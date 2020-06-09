@@ -242,7 +242,7 @@ class Knob extends Component<KnobProps, KnobState> {
       //Note: the d3 event container is the same element, so coordinates
       //are relative to it.
       let startPos = { x: event.x - cx, y: event.y - cy };
-      let startAngle = utils.getAngleForPoint(startPos.x, startPos.y);
+      let startAngle = self.convertValueToAngle(value);
       let lastPos = startPos;
       let lastAngle = utils.getAngleForPoint(lastPos.x, lastPos.y);
 
@@ -269,7 +269,7 @@ class Knob extends Component<KnobProps, KnobState> {
             //Start monitoring!
             //Reset startPos y startAngle
             startPos = currentPos;
-            startAngle = utils.getAngleForPoint(currentPos.x, currentPos.y);
+            startAngle = self.convertValueToAngle(value);
             monitoring = true;
           }
         } else {

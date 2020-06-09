@@ -5362,7 +5362,7 @@ var Knob = function (_Component) {
         //Note: the d3 event container is the same element, so coordinates
         //are relative to it.
         var startPos = { x: _d3Selection.event.x - cx, y: _d3Selection.event.y - cy };
-        var startAngle = _utils2.default.getAngleForPoint(startPos.x, startPos.y);
+        var startAngle = self.convertValueToAngle(value);
         var lastPos = startPos;
         var lastAngle = _utils2.default.getAngleForPoint(lastPos.x, lastPos.y);
 
@@ -5386,7 +5386,7 @@ var Knob = function (_Component) {
               //Start monitoring!
               //Reset startPos y startAngle
               startPos = currentPos;
-              startAngle = _utils2.default.getAngleForPoint(currentPos.x, currentPos.y);
+              startAngle = self.convertValueToAngle(value);
               monitoring = true;
             }
           } else {
