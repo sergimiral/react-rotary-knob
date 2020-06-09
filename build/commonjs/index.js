@@ -5491,8 +5491,10 @@ var Knob = function (_Component) {
           preciseMode = _props.preciseMode,
           lockVertical = _props.lockVertical,
           lockHorizontal = _props.lockHorizontal,
+          bg = _props.bg,
+          bgactive = _props.bgactive,
           unlockDistance = _props.unlockDistance,
-          rest = _objectWithoutProperties(_props, ["value", "defaultValue", "min", "max", "rotateDegrees", "clampMax", "clampMin", "onChange", "onStart", "onEnd", "skin", "style", "format", "preciseMode", "lockVertical", "lockHorizontal", "unlockDistance"]);
+          rest = _objectWithoutProperties(_props, ["value", "defaultValue", "min", "max", "rotateDegrees", "clampMax", "clampMin", "onChange", "onStart", "onEnd", "skin", "style", "format", "preciseMode", "lockVertical", "lockHorizontal", "bg", "bgactive", "unlockDistance"]);
 
       var currentValue = this.getValue();
       var angle = this.convertValueToAngle(currentValue);
@@ -5600,6 +5602,8 @@ Knob.defaultProps = {
   lockHorizontal: false,
   unlockDistance: 100,
   defaultValue: 0,
+  bg: '#222',
+  bgactive: '#000',
   step: 1
 };
 exports.Knob = Knob;
