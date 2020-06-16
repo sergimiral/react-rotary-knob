@@ -269,15 +269,22 @@ class Knob extends Component<KnobProps, KnobState> {
             //Start monitoring!
             //Reset startPos y startAngle
             startPos = currentPos;
-            startAngle = self.convertValueToAngle(value);
+            startAngle = self.convertValueToAngle(value)
             monitoring = true;
           }
         } else {
           monitoring = true;
         }
 
-        let currentAngle = utils.getAngleForPoint(currentPos.x, currentPos.y);
-
+        let currentAngle;
+        if (self.props.lockVertical) {
+          currentAngle = utils.getAngleForPoint(currentPos.y);
+        }
+        if (self.props.lockHorizontal) {
+          currentAngle = utils.getAngleForPoint(currentPos.x);
+        } else {
+          currentAngle = utils.getAngleForPoint(currentPos.x, currentPos.y);
+        }
         const deltaAngle = currentAngle - startAngle;
 
         lastPos = currentPos;

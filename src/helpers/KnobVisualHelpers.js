@@ -59,12 +59,12 @@ class KnobVisualHelpers extends React.Component<
   }
 
   render() {
-    const markCircleColor =
-      this.props.minimumDragDistance <= this.props.radius ? "green" : "grey";
-    const fillColor =
-      this.props.minimumDragDistance <= this.props.radius
-        ? "#88E22D"
-        : "#D8D8D8";
+    const markCircleColor = "rgba(0,0,0,0.1)"
+      // this.props.minimumDragDistance <= this.props.radius ? "green" : "grey";
+    const fillColor = "#000000"
+      // this.props.minimumDragDistance <= this.props.radius
+      //   ? "#88E22D"
+      //   : "#D8D8D8";
     const minDistanceCueVisible = this.props.minimumDragDistance >= this.props.radius;
 
     return (
@@ -75,7 +75,7 @@ class KnobVisualHelpers extends React.Component<
           height="100%"
         >
           <defs>
-            <marker
+            {/* <marker
               id="Triangle"
               viewBox="0 0 10 10"
               refX="1"
@@ -85,7 +85,7 @@ class KnobVisualHelpers extends React.Component<
               orient="auto"
             >
               <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
+            </marker> */}
           </defs>
 
           {/* Current drag distance */}
@@ -116,14 +116,14 @@ class KnobVisualHelpers extends React.Component<
             strokeDasharray="5, 5"
           /> */}
           {/* Line to current value */}
-          <DrawLine
+          {/* <DrawLine
             p1={{ x: this.state.centerX, y: this.state.centerY }}
             p2={{
               x: this.state.valueMarkerX + this.state.centerX,
               y: this.state.valueMarkerY + this.state.centerY
             }}
-            markerEnd="url(#Triangle)"
-          />
+            // markerEnd="url(#Triangle)"
+          /> */}
         </svg>
       </HelpersOverlay>
     );

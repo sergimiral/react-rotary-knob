@@ -14,7 +14,7 @@ class KnobApp extends React.Component {
   changeValue(val) {
     // this.setState({ value: val });
     const maxDistance = 25;
-    let distance = Math.abs(val - this.state.val);
+    let distance = Math.abs(value - this.state.val);
     if (distance > maxDistance) {
         return;
     } else {

@@ -4696,8 +4696,12 @@ var KnobVisualHelpers = function (_React$Component) {
   _createClass(KnobVisualHelpers, [{
     key: "render",
     value: function render() {
-      var markCircleColor = this.props.minimumDragDistance <= this.props.radius ? "green" : "grey";
-      var fillColor = this.props.minimumDragDistance <= this.props.radius ? "#88E22D" : "#D8D8D8";
+      var markCircleColor = "rgba(0,0,0,0.1)";
+      // this.props.minimumDragDistance <= this.props.radius ? "green" : "grey";
+      var fillColor = "#000000";
+      // this.props.minimumDragDistance <= this.props.radius
+      //   ? "#88E22D"
+      //   : "#D8D8D8";
       var minDistanceCueVisible = this.props.minimumDragDistance >= this.props.radius;
 
       return _react2.default.createElement(
@@ -4710,23 +4714,7 @@ var KnobVisualHelpers = function (_React$Component) {
             width: "100%",
             height: "100%"
           },
-          _react2.default.createElement(
-            "defs",
-            null,
-            _react2.default.createElement(
-              "marker",
-              {
-                id: "Triangle",
-                viewBox: "0 0 10 10",
-                refX: "1",
-                refY: "5",
-                markerWidth: "6",
-                markerHeight: "6",
-                orient: "auto"
-              },
-              _react2.default.createElement("path", { d: "M 0 0 L 10 5 L 0 10 z" })
-            )
-          ),
+          _react2.default.createElement("defs", null),
           _react2.default.createElement(_DrawCircle2.default, {
             borderColor: markCircleColor,
             fillColor: fillColor,
@@ -4743,14 +4731,6 @@ var KnobVisualHelpers = function (_React$Component) {
             cx: this.state.centerX,
             cy: this.state.centerY,
             strokeDasharray: "5, 5"
-          }),
-          _react2.default.createElement(_DrawLine2.default, {
-            p1: { x: this.state.centerX, y: this.state.centerY },
-            p2: {
-              x: this.state.valueMarkerX + this.state.centerX,
-              y: this.state.valueMarkerY + this.state.centerY
-            },
-            markerEnd: "url(#Triangle)"
           })
         )
       );
@@ -5393,8 +5373,15 @@ var Knob = function (_Component) {
             monitoring = true;
           }
 
-          var currentAngle = _utils2.default.getAngleForPoint(currentPos.x, currentPos.y);
-
+          var currentAngle = void 0;
+          if (self.props.lockVertical) {
+            currentAngle = _utils2.default.getAngleForPoint(currentPos.y);
+          }
+          if (self.props.lockHorizontal) {
+            currentAngle = _utils2.default.getAngleForPoint(currentPos.x);
+          } else {
+            currentAngle = _utils2.default.getAngleForPoint(currentPos.x, currentPos.y);
+          }
           var deltaAngle = currentAngle - startAngle;
 
           lastPos = currentPos;

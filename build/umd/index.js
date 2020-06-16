@@ -5402,8 +5402,15 @@ var Knob = function (_Component) {
             monitoring = true;
           }
 
-          var currentAngle = _utils2.default.getAngleForPoint(currentPos.x, currentPos.y);
-
+          var currentAngle = void 0;
+          if (self.props.lockVertical) {
+            currentAngle = _utils2.default.getAngleForPoint(currentPos.y);
+          }
+          if (self.props.lockHorizontal) {
+            currentAngle = _utils2.default.getAngleForPoint(currentPos.x);
+          } else {
+            currentAngle = _utils2.default.getAngleForPoint(currentPos.x, currentPos.y);
+          }
           var deltaAngle = currentAngle - startAngle;
 
           lastPos = currentPos;
