@@ -59,9 +59,9 @@ class KnobVisualHelpers extends React.Component<
   }
 
   render() {
-    const markCircleColor = "rgba(0,0,0,0.1)"
+    const markCircleColor = "transparent"
       // this.props.minimumDragDistance <= this.props.radius ? "green" : "grey";
-    const fillColor = "#000000"
+    const fillColor = "transparent"
       // this.props.minimumDragDistance <= this.props.radius
       //   ? "#88E22D"
       //   : "#D8D8D8";

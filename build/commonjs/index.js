@@ -4696,9 +4696,9 @@ var KnobVisualHelpers = function (_React$Component) {
   _createClass(KnobVisualHelpers, [{
     key: "render",
     value: function render() {
-      var markCircleColor = "rgba(0,0,0,0.1)";
+      var markCircleColor = "transparent";
       // this.props.minimumDragDistance <= this.props.radius ? "green" : "grey";
-      var fillColor = "#000000";
+      var fillColor = "transparent";
       // this.props.minimumDragDistance <= this.props.radius
       //   ? "#88E22D"
       //   : "#D8D8D8";
@@ -5481,17 +5481,21 @@ var Knob = function (_Component) {
           bg = _props.bg,
           bgactive = _props.bgactive,
           unlockDistance = _props.unlockDistance,
-          rest = _objectWithoutProperties(_props, ["value", "defaultValue", "min", "max", "rotateDegrees", "clampMax", "clampMin", "onChange", "onStart", "onEnd", "skin", "style", "format", "preciseMode", "lockVertical", "lockHorizontal", "bg", "bgactive", "unlockDistance"]);
+          padding = _props.padding,
+          rest = _objectWithoutProperties(_props, ["value", "defaultValue", "min", "max", "rotateDegrees", "clampMax", "clampMin", "onChange", "onStart", "onEnd", "skin", "style", "format", "preciseMode", "lockVertical", "lockHorizontal", "bg", "bgactive", "unlockDistance", "padding"]);
 
       var currentValue = this.getValue();
       var angle = this.convertValueToAngle(currentValue);
 
       var styles = {
         container: Object.assign({}, {
-          width: "50px",
-          height: "50px",
+          minWidth: "80px",
+          minHeigth: "80px",
+          width: "calc(50px + " + padding + ")",
+          height: "calc(50px + " + padding + ")",
           overflow: "hidden",
-          position: "relative"
+          position: "relative",
+          padding: "calc(" + padding + "/2)"
         }, style),
         input: {
           width: "50%",
@@ -5588,6 +5592,7 @@ Knob.defaultProps = {
   lockVertical: false,
   lockHorizontal: false,
   unlockDistance: 100,
+  padding: 0,
   defaultValue: 0,
   bg: '#222',
   bgactive: '#000',

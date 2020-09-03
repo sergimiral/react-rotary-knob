@@ -4705,8 +4705,12 @@ var KnobVisualHelpers = function (_React$Component) {
   _createClass(KnobVisualHelpers, [{
     key: "render",
     value: function render() {
-      var markCircleColor = this.props.minimumDragDistance <= this.props.radius ? "green" : "grey";
-      var fillColor = this.props.minimumDragDistance <= this.props.radius ? "#88E22D" : "#D8D8D8";
+      var markCircleColor = "transparent";
+      // this.props.minimumDragDistance <= this.props.radius ? "green" : "grey";
+      var fillColor = "transparent";
+      // this.props.minimumDragDistance <= this.props.radius
+      //   ? "#88E22D"
+      //   : "#D8D8D8";
       var minDistanceCueVisible = this.props.minimumDragDistance >= this.props.radius;
 
       return _react2.default.createElement(
@@ -4719,23 +4723,7 @@ var KnobVisualHelpers = function (_React$Component) {
             width: "100%",
             height: "100%"
           },
-          _react2.default.createElement(
-            "defs",
-            null,
-            _react2.default.createElement(
-              "marker",
-              {
-                id: "Triangle",
-                viewBox: "0 0 10 10",
-                refX: "1",
-                refY: "5",
-                markerWidth: "6",
-                markerHeight: "6",
-                orient: "auto"
-              },
-              _react2.default.createElement("path", { d: "M 0 0 L 10 5 L 0 10 z" })
-            )
-          ),
+          _react2.default.createElement("defs", null),
           _react2.default.createElement(_DrawCircle2.default, {
             borderColor: markCircleColor,
             fillColor: fillColor,
@@ -4752,14 +4740,6 @@ var KnobVisualHelpers = function (_React$Component) {
             cx: this.state.centerX,
             cy: this.state.centerY,
             strokeDasharray: "5, 5"
-          }),
-          _react2.default.createElement(_DrawLine2.default, {
-            p1: { x: this.state.centerX, y: this.state.centerY },
-            p2: {
-              x: this.state.valueMarkerX + this.state.centerX,
-              y: this.state.valueMarkerY + this.state.centerY
-            },
-            markerEnd: "url(#Triangle)"
           })
         )
       );
@@ -5510,17 +5490,21 @@ var Knob = function (_Component) {
           bg = _props.bg,
           bgactive = _props.bgactive,
           unlockDistance = _props.unlockDistance,
-          rest = _objectWithoutProperties(_props, ["value", "defaultValue", "min", "max", "rotateDegrees", "clampMax", "clampMin", "onChange", "onStart", "onEnd", "skin", "style", "format", "preciseMode", "lockVertical", "lockHorizontal", "bg", "bgactive", "unlockDistance"]);
+          padding = _props.padding,
+          rest = _objectWithoutProperties(_props, ["value", "defaultValue", "min", "max", "rotateDegrees", "clampMax", "clampMin", "onChange", "onStart", "onEnd", "skin", "style", "format", "preciseMode", "lockVertical", "lockHorizontal", "bg", "bgactive", "unlockDistance", "padding"]);
 
       var currentValue = this.getValue();
       var angle = this.convertValueToAngle(currentValue);
 
       var styles = {
         container: Object.assign({}, {
-          width: "50px",
-          height: "50px",
+          minWidth: "80px",
+          minHeigth: "80px",
+          width: "calc(50px + " + padding + ")",
+          height: "calc(50px + " + padding + ")",
           overflow: "hidden",
-          position: "relative"
+          position: "relative",
+          padding: "calc(" + padding + "/2)"
         }, style),
         input: {
           width: "50%",
@@ -5617,6 +5601,7 @@ Knob.defaultProps = {
   lockVertical: false,
   lockHorizontal: false,
   unlockDistance: 100,
+  padding: 0,
   defaultValue: 0,
   bg: '#222',
   bgactive: '#000',

@@ -62,6 +62,7 @@ type KnobProps = {
   lockHorizontal: boolean,
   preciseMode: boolean,
   unlockDistance: number,
+  padding: string,
   bg: string,
   bgactive: string,
   step: number
@@ -122,6 +123,7 @@ class Knob extends Component<KnobProps, KnobState> {
     lockVertical: false,
     lockHorizontal: false,
     unlockDistance: 100,
+    padding: 0,
     defaultValue: 0,
     bg: '#222',
     bgactive: '#000',
@@ -381,6 +383,7 @@ class Knob extends Component<KnobProps, KnobState> {
       bg,
       bgactive,
       unlockDistance,
+      padding,
       ...rest
     } = this.props;
 
@@ -391,10 +394,13 @@ class Knob extends Component<KnobProps, KnobState> {
       container: Object.assign(
         {},
         {
-          width: "50px",
-          height: "50px",
+          minWidth: "80px",
+          minHeigth: "80px",
+          width: "calc(50px + " + padding + ")",
+          height: "calc(50px + " + padding + ")",
           overflow: "hidden",
-          position: "relative"
+          position: "relative",
+          padding: "calc(" + padding + "/2)",
         },
         style
       ),
